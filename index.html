@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Calculator | Conversions | Dosages | Vet Med Info for Techs/Drs</title>
+
+        <style>   
+
+            /* Universal & Root Styles */
+
+            * {
+                box-sizing: border-box;
+                scroll-behavior: smooth;
+                font-size: 18px;
+                text-align: center;
+                font-family: 'century gothic', serif;
+            }
+
+            :root {
+                --nav-bg-color: navy;
+                --nav-text-color: aqua;
+                --header-bg-color: ;
+                --header-text-color: ;
+                --main-bg-color: white;
+                --main-text-color: black;
+                --footer-bg-color: navy;
+                --footer-text-color: aqua;
+                --link-default-color: ;
+                --link-hover-color: ;
+                --link-active-color: ;
+                --link-visited-color: ;
+                --link-bg-color: ;
+                --link-hover-bg-color: rgba(255, 255, 255, 0.1);
+                --border-color: aqua;
+
+                --calc-border-color: black;
+                --calc-body-color: gray;
+                --calc-button-color: rgb(167, 167, 167);
+                --calc-button-hover-color: rgba(248, 248, 248, 0.4);
+                --calc-button-section-bg: rgb(216, 216, 216);
+                --calc-display-bg-color: rgb(248, 248, 248);
+                --calc-display-text-color: black;
+                --divider-bg-color: rgb(80, 80, 80);
+            }
+
+            /* Main styles */
+
+            html, body, header, main, footer {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: auto;
+            }
+
+                html {
+                    border: 2px solid red;
+                }
+
+                body {
+                    border: 2px solid orange;
+                }
+
+                header {
+                    border: 2px solid green;
+                }
+
+                main {
+                    border: 2px solid blue;
+                }
+
+                footer {
+                    background-color: var(--footer-bg-color);
+                    color: var(--footer-text-color);
+                }
+
+                    footer p {
+                        margin: 0 auto;
+                        padding: 0.1rem;
+                        /* font-style: italic; */
+                        font-size: 0.8rem;
+                    }
+
+            nav, section {
+                margin: 0 auto;
+                padding: 0;
+                width: 100%;
+                height: auto;
+            }  
+
+                nav {
+                    background-color: var(--nav-bg-color);
+                    color: var(--nav-text-color);
+                }
+
+                section {
+                    border: 2px solid magenta;
+                }
+        
+
+        /* NAV styles */ 
+
+           #menu-main {
+            margin: 0 0 0 0.5rem;
+            padding: 0 0.2rem;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+           }
+
+           #menu-main li {
+            margin: 0.2rem 0 0 0.5rem;
+            padding: 0.2rem;
+            list-style: none;
+            font-size: 1.2rem;
+           }
+
+            #menu-options {
+            margin: 0 0 0 0.5rem;
+            padding: 0 0.2rem;
+           }
+
+           #menu-options li {
+            margin: 0.1rem;
+            padding: 0.2rem;
+            font-size: 1.1rem;
+            width: 100%;
+            list-style-position: outside;
+            text-align: center;
+           }
+
+           #menu-options a {
+            line-height: 1.2rem;
+            color: var(--link-default-color);
+            margin: 0.1rem auto;
+            padding: 0.2rem;
+            text-decoration: none;
+           }
+
+           #menu-options a:hover {
+            background-color: var(--link-hover-bg-color);
+            color: var(--link-hover-color);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+           }
+
+
+           /* CALCULATOR STYLES */ 
+
+           #calc-outer-shell {
+            margin: 1rem auto 2rem auto;
+            padding: 0;
+            width: 90%;
+            background-color: var(--calc-body-color);
+            border: 3px solid var(--calc-border-color);
+            border-radius: 0.4rem;
+            max-width: 40rem;
+           }
+
+           #calc-inner-shell {
+            margin: 0 auto;
+            padding: 0.2rem;
+            border: 1px solid var(--calc-body-color);
+            border-radius: 0.4rem;
+           }
+
+           #calc-output-display {
+            margin: 0.2rem auto;
+            padding: 0.2rem 0.6rem;
+            width: 100%;
+            background-color: var(--calc-display-bg-color);
+            color: var(--calc-display-text-color);
+            border: 1px solid var(--calc-border-color);
+            border-radius: 0.4rem;
+            font-size: 2.6rem;
+            line-height: 3rem;
+            text-align: right;
+           }
+
+           #buttons-section {
+            margin: 0.2rem auto;
+            padding: 0.2rem 0.6rem;
+            width: 100%;
+            background-color: var(--calc-button-section-bg);
+            color: var(--calc-display-text-color);
+            border: 1px solid var(--calc-border-color);
+            border-radius: 0.4rem;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+           }
+
+           .divider {
+            margin: 0.4rem auto;
+            padding: 0.02rem;
+            border: 2px solid var(--calc-border-color);
+            border-radius: 0.4rem;
+            background-color: var(--divider-bg-color);
+            
+            width: 96%;
+           }
+
+           .buttons-row {
+            margin: 0 auto;
+            padding: 0.2rem;
+
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            overflow: hidden;
+
+           }
+
+           .button {
+            cursor: pointer;
+            margin: 0.2rem 0.4rem 0.1rem 0.4rem;
+            padding: 0.2rem;
+            background-color: var(--calc-button-color);
+            border: 2px solid var(--calc-border-color);
+            border-radius: 0.4rem;
+            font-size: 2rem;
+            font-weight: 550;
+            line-height: 2.4rem;
+            flex-grow: 1;
+            
+           }
+
+           .button-wide {
+            width: 5.6rem;
+           }
+
+           .button:hover {
+            background-color: var(--calc-button-hover-color);
+           }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <!-- NAV BAR start -->
+            <nav>
+                <ul id="menu-main">
+                    <li>Menu <!-- make sticky/fixed to top, like an app, but opens/closes dropdown menu, and change to hamburger icon for mobile -->
+                        <ul id="menu-options">
+                            <li><a href="#calculator">Calculator</a></li>
+                            <li><a href="#conversions">Conversions</a></li>
+                            <li><a href="#dosages">Dosages</a></li>
+                        </ul>    
+                    </li>
+                </ul>
+            </nav>
+            <!-- NAV BAR end -->
+
+            <!-- HERO start -->
+            <section id="hero">
+                <h1>Vet Tech Calculators</h1>
+                <p>Calculators, common conversions and dosages for Vet Techs</p>
+            </section>    
+            <!-- HERO end -->
+        </header>
+
+        <main>  <!-- make site look smooth/light, and more app-like/modern -->
+
+            <section id="calculator">  <!-- CALC start -->
+                <h2>Calculator</h2>
+                <div id="calc-outer-shell">
+                    <div id="calc-inner-shell">
+                        <div id="calc-output-display">
+                            Calculator Output Display area here :-D
+                        </div>
+                        <div class="divider"></div>
+                        <div id="buttons-section">
+                            <div class="buttons-row">
+                                <div class="button">AC</div>
+                                <div class="button">+/-</div>
+                                <div class="button">%</div>
+                                <div class="button">/</div>
+                            </div>
+                            <div class="buttons-row">    
+                                <div class="button">7</div>
+                                <div class="button">8</div>
+                                <div class="button">9</div>
+                                <div class="button">x</div>
+                            </div>
+                            <div class="buttons-row">    
+                                <div class="button">4</div>
+                                <div class="button">5</div>
+                                <div class="button">6</div>
+                                <div class="button">-</div>
+                            </div>
+                            <div class="buttons-row">   
+                                <div class="button">1</div>
+                                <div class="button">2</div>
+                                <div class="button">3</div>
+                                <div class="button">+</div>
+                            </div>
+                            <div class="buttons-row">     
+                                <div class="button button-wide">0</div>
+                                <div class="button">.</div>
+                                <div class="button">=</div>
+                            </div>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section> <!-- CALC end -->
+
+            <section id="conversions">  <!-- Conversions start ... (lbs to kgs, ozs to ml, etc ... -->
+                <h2>Common Conversions</h2>
+                <div>
+                    <h3>Weight Conversions</h3>
+
+                    <div>
+                        <h4>Lbs to Kgs</h4>
+                        <div>
+                             __ lbs x 2.2kg/1lb = __ kg
+                        </div>
+                    </div>
+                    <div>
+                        <h4>kgs to lbs</h4>
+                        <div>
+                            __ kg x 1lb/2.2kg = __ lbs
+                       </div>
+                    </div>
+                    <div>
+                        <h4>lbs to gs</h4>
+                    </div>
+                    <div>
+                        <h4>gs to lbs</h4>
+                    </div>
+                    <div>
+                        <h4>gs to mgs</h4>
+                    </div>
+                    <div>
+                        <h4>mgs to gs</h4>
+                    </div>
+                    <div>
+                        <h4>kg to mg</h4>
+                    </div>
+                    <div>
+                        <h4>mg to kg</h4>
+                    </div>
+                    <div>
+                        <h4>kg to g</h4>
+                    </div>
+                    <div>
+                        <h4>g to kg</h4>
+                    </div>
+                    <!-- add copy/paste/store value type functionality to enhance usefulness... -->
+                </div>
+                <div>
+                    <h3>Liquid/Volume Conversions</h3>
+                    <div>ozs to mLs</div>
+                    <div>mLs to ozs</div>
+                    <div>L to mL</div>
+                    <div>mL to L</div>
+                    <div>mL to tsp</div>
+                    <div>tsp tp mL</div>
+                    <div>mL to tbsp</div>
+                    <div>tbsp tp mL</div>
+                    <div>C to oz</div>
+                    <div>oz to C</div>
+                    <div></div>
+                    <div></div>
+
+                   <!-- add copy/paste/store value type functionality to enhance usefulness... -->
+                </div>
+
+
+
+            </section> <!-- Conversions end -->
+
+            <section id="dosages">  <!-- Dosage formulas start -->
+                <h2>Frequently used dosages/fluid rates/etc...</h2>
+                <div>
+                    Fluid rates - 
+                    include function to import weight from above? ... maint vs sx vs shock, etc... 
+                    variables for renal/diabetes/cardiac rates? 
+                </div>
+                <div>
+                    Frequently used dosages - sx & inj (ket, bup, etc) (inc diroban/etc & adequan?) 
+                    <div>
+                        <h4>bup - 0.3mg/mL</h4>
+                        <div>
+                             __ kg x 0.02 / 0.3 = __ mL 
+                        </div>
+                    </div>
+                    <div>
+                        <h4>bup - 0.6mg/mL</h4>
+                        <div>
+                             __ kg x 0.02 / 0.6 = __ mL 
+                        </div>
+                    </div>
+                </div>
+            </section> <!-- Dosage formulas end -->
+        </main>
+        <footer>
+            <p>
+                (c) 2024 Amie's Vet Tech Calculators :-D
+            </p>
+        </footer>
+    </body>
+</html>
